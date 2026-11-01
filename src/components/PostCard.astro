@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { withBase } from '@/lib/paths';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
 import Tag from '@/components/Tag.astro';
@@ -14,7 +15,7 @@ const tags = post.data.tags.filter((tag) => slugifyTag(tag) !== '');
 ---
 
 <article class="group border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 ease-[ease] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
-  <a class="block" href={`/blog/${postSlug(post)}/`}>
+  <a class="block" href={withBase(`/blog/${postSlug(post)}/`)}>
     <div>
       <h2 class="m-0 text-[clamp(1.45rem,3vw,2.05rem)] leading-none font-bold tracking-[0.005em] text-ink transition-colors duration-160 ease-[ease] group-hover:text-accent">
         {post.data.title}
@@ -31,7 +32,7 @@ const tags = post.data.tags.filter((tag) => slugifyTag(tag) !== '');
   {tags.length > 0 && (
     <p class="mt-4 flex max-w-[680px] flex-wrap gap-2">
       {tags.map((tag) => (
-        <Tag href={`/tags/${slugifyTag(tag)}/`}>#{tag}</Tag>
+        <Tag href={withBase(`/tags/${slugifyTag(tag)}/`)}>#{tag}</Tag>
       ))}
     </p>
   )}

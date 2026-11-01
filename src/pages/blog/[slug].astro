@@ -4,7 +4,8 @@ import Layout from '@/components/Layout.astro';
 import Tag from '@/components/Tag.astro';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
-import { AUTHOR_NAME, SITE_NAME, SITE_URL } from '@/lib/site';
+import { withBase } from '@/lib/paths';
+import { AUTHOR_NAME, SITE_NAME } from '@/lib/site';
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
 
 export async function getStaticPaths() {
@@ -32,11 +33,11 @@ const postSchema = JSON.stringify({
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.date.toISOString(),
-  url: new URL(`/blog/${slug}/`, Astro.site).toString(),
+  url: new URL(withBase(`/blog/${slug}/`), Astro.site).toString(),
   author: {
     '@type': 'Person',
     name: AUTHOR_NAME,
-    url: new URL('/', SITE_URL).toString(),
+    url: new URL(withBase('/'), Astro.site).toString(),
   },
 }).replace(/</g, '\\u003c');
 ---
@@ -76,7 +77,7 @@ const postSchema = JSON.stringify({
           {tags.length > 0 && (
             <p class="mt-4 flex max-w-[680px] flex-wrap gap-2">
               {tags.map((tag) => (
-                <Tag href={`/tags/${slugifyTag(tag)}/`}>#{tag}</Tag>
+                <Tag href={withBase(`/tags/${slugifyTag(tag)}/`)}>#{tag}</Tag>
               ))}
             </p>
           )}

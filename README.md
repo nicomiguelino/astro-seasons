@@ -22,7 +22,8 @@ After generating:
 
 1. Replace the placeholders in `src/lib/site.ts` (`SITE_NAME`, `AUTHOR_NAME`, `SITE_URL`, `GITHUB_URL`, and so on). `astro.config.mjs` reads `SITE_URL` from there.
 2. Set `SOURCE_URL` in `src/lib/site.ts` to the repository that builds your site (see [License](#license)).
-3. Replace the example posts in `src/content/blog/` and the pages under `src/pages/` (such as `experience/`) with your own content.
+3. If you deploy to a sub-path (a GitHub Pages project page at `https://<user>.github.io/<repo>/`), see [Deploying under a sub-path](#deploying-under-a-sub-path).
+4. Replace the example posts in `src/content/blog/` and the pages under `src/pages/` (such as `experience/`) with your own content.
 
 Prefer to work from a clone? Run `git clone https://github.com/nicomiguelino/astro-seasons.git` and follow the steps below.
 
@@ -113,6 +114,28 @@ npx playwright show-report                              # open the last HTML rep
 
 The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared dependency setup, on pushes and pull requests to `main`. It can also be started manually.
 
+## Deploying under a sub-path
+
+Served from the root of a domain (a `<user>.github.io` repository or a custom domain), the site needs no extra setup. Served from a sub-path (a GitHub Pages project page at `https://<user>.github.io/<repo>/`), set two environment variables at build time:
+
+```sh
+SITE_URL=https://<user>.github.io BASE_PATH=/<repo> npm run build
+```
+
+`astro.config.mjs` passes them to Astro's `site` and `base` options. With neither set, the build is for a domain root. `.github/workflows/deploy.yml` sets both from the repository owner and name and deploys to GitHub Pages. To use it for your own copy, remove the `if: github.repository == ...` line, then set **Settings > Pages > Source** to **GitHub Actions**.
+
+Astro's `base` only rewrites URLs that Astro generates itself (stylesheets, scripts, and fonts referenced from CSS). Root-absolute paths you write by hand are not rewritten, so wrap them with `withBase()` from `src/lib/paths.ts`:
+
+```astro
+---
+import { withBase } from '@/lib/paths';
+---
+
+<a href={withBase('/blog/')}>Blog</a>
+```
+
+This applies to `href`, `src`, and `fetch` URLs in `.astro` and `.ts` files. In Markdown, use relative links (for example `../markdown-features/`) so they work under any base. `withBase()` returns the path unchanged when there is no base.
+
 ## Customizing
 
 Site-wide values (site name, author name, description, job title, site URL, the GitHub and LinkedIn profile links, and the blog, tags, and experience page descriptions) live in `src/lib/site.ts`. The header, footer, page titles, RSS feed, search, and structured data all read from it, and the letter in the header logo is the first character of `SITE_NAME`. Everything else to customize:
@@ -124,7 +147,7 @@ Site-wide values (site name, author name, description, job title, site URL, the 
 - `public/favicon.svg`: the tab icon, a static file that doesn't follow `SITE_NAME`, so replace it with your own
 - `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, season dates); see [Seasonal theme](#seasonal-theme)
 - `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
-- `public/robots.txt`: the sitemap URL (a static file, so it can't import from `site.ts`)
+- `public/robots.txt`: the sitemap URL (a static file, so it can't import from `site.ts`). Crawlers only read `robots.txt` at the root of a domain, so it has no effect on a sub-path deploy
 - `public/assets/og.png`: social preview image, 1200x630. It's a screenshot of the autumn home page, so replace it with your own
 
 ## Writing posts

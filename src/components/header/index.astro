@@ -1,5 +1,6 @@
 ---
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
+import { withBase, withoutBase } from '@/lib/paths';
 import { GITHUB_URL, LINKEDIN_URL, SITE_NAME } from '@/lib/site';
 import BrandLogo from './BrandLogo.astro';
 import GitHubIcon from './GitHubIcon.astro';
@@ -9,30 +10,30 @@ import SearchIcon from './SearchIcon.astro';
 import ThemePicker from './ThemePicker.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
-const currentPath = Astro.url.pathname;
+const currentPath = withoutBase(Astro.url.pathname);
 const navMenuItems = [
   {
-    href: '/',
+    href: withBase('/'),
     title: 'Home',
     current: currentPath === '/',
   },
   {
-    href: '/blog/',
+    href: withBase('/blog/'),
     title: 'Blog',
     current: currentPath.startsWith('/blog'),
   },
   {
-    href: '/experience/',
+    href: withBase('/experience/'),
     title: 'Experience',
     current: currentPath === '/experience/',
   },
   {
-    href: '/colors/',
+    href: withBase('/colors/'),
     title: 'Colors',
     current: currentPath.startsWith('/colors'),
   },
   {
-    href: '/tags/',
+    href: withBase('/tags/'),
     title: 'Tags',
     current: currentPath.startsWith('/tags'),
   },
@@ -41,7 +42,7 @@ const navMenuItems = [
 
 <header class="sticky top-0 z-20 border-b-5 border-ink bg-bg">
   <nav class="nav" aria-label="Primary navigation">
-    <a class="brand" href="/" aria-label={SITE_NAME}>
+    <a class="brand" href={withBase('/')} aria-label={SITE_NAME}>
       <BrandLogo />
       <span>{SITE_NAME}</span>
     </a>
@@ -67,7 +68,7 @@ const navMenuItems = [
         <a class="nav-icon-link" href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noopener">
           <LinkedInIcon />
         </a>
-        <a class="nav-icon-link" href="/rss.xml" aria-label="RSS feed">
+        <a class="nav-icon-link" href={withBase('/rss.xml')} aria-label="RSS feed">
           <RssIcon />
         </a>
       </div>

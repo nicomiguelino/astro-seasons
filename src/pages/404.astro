@@ -2,6 +2,7 @@
 import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
+import { withBase } from '@/lib/paths';
 import { SITE_NAME } from '@/lib/site';
 ---
 
@@ -10,10 +11,10 @@ import { SITE_NAME } from '@/lib/site';
     <PageHero title="404" eyebrow="page not found">
       <Lede>This page doesn't exist. It may have been moved, deleted, or never published.</Lede>
       <div class="mt-7 flex flex-wrap gap-[0.6rem]">
-        <a class="button button-primary" href="/">
+        <a class="button button-primary" href={withBase('/')}>
           Go home
         </a>
-        <a class="button button-secondary" href="/blog/">
+        <a class="button button-secondary" href={withBase('/blog/')}>
           Browse the blog
         </a>
       </div>
