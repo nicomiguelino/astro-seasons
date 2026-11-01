@@ -1,0 +1,44 @@
+name: Deploy demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # Served from https://<owner>.github.io/<repo>/, so the site needs both values at build time.
+  SITE_URL: https://${{ github.repository_owner }}.github.io
+  BASE_PATH: /${{ github.event.repository.name }}
+
+jobs:
+  build:
+    name: build
+    # Remove this line to deploy your own copy (and enable Pages with the "GitHub Actions" source).
+    if: github.repository == 'nicomiguelino/astro-seasons'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v7
+      - name: Install, build, and upload your site
+        uses: withastro/action@v6
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
