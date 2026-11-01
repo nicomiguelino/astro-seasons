@@ -2,6 +2,30 @@
 
 A season-aware neobrutalist theme for your blog, built with [Astro](https://astro.build/) and Tailwind CSS. The palette follows the calendar, with a light and a dark mode for every season. See the [screenshots](#seasonal-theme) below.
 
+## Create a project from this template
+
+Generate a new project from this repository with the Astro CLI. Use the package manager you prefer:
+
+```sh
+npm create astro@latest -- my-site --template nicomiguelino/astro-seasons
+pnpm create astro@latest my-site --template nicomiguelino/astro-seasons
+bun create astro@latest my-site --template nicomiguelino/astro-seasons
+```
+
+To use a specific branch or tag, append it to the template name: `--template nicomiguelino/astro-seasons#branch-name`.
+
+The CLI copies the template, offers to install dependencies, and offers to initialize a git repository. Accept the git prompt (or run `git init` yourself before `npm install`) so the Husky pre-commit hook gets set up.
+
+The template ships a `package-lock.json`. If you use another package manager, delete it and let your package manager generate its own lockfile. The scripts below work with any of them (for example `pnpm run dev` or `bun run dev`).
+
+After generating:
+
+1. Replace the placeholders in `src/lib/site.ts` (`SITE_NAME`, `AUTHOR_NAME`, `SITE_URL`, `GITHUB_URL`, and so on). `astro.config.mjs` reads `SITE_URL` from there.
+2. Set `SOURCE_URL` in `src/lib/site.ts` to the repository that builds your site (see [License](#license)).
+3. Replace the example posts in `src/content/blog/` and the pages under `src/pages/` (such as `experience/`) with your own content.
+
+Prefer to work from a clone? Run `git clone https://github.com/nicomiguelino/astro-seasons.git` and follow the steps below.
+
 ## Getting started
 
 Install the dependencies and run the project:
