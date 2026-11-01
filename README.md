@@ -18,20 +18,20 @@ claude plugin install nicomiguelino@nicomiguelino --scope project
 Then install and run:
 
 ```sh
-bun install
-bun run dev           # dev server on :4321
-bun run build         # production build
-bun run preview       # preview the production build
-bun run check         # astro type checking
-bun run lint:check    # lint with ESLint
-bun run lint:fix      # lint and apply safe fixes
-bun run format:check  # check formatting with Prettier
-bun run format:fix    # format files with Prettier
-bun run test:e2e      # Playwright E2E and screenshot tests
+npm install
+npm run dev           # dev server on :4321
+npm run build         # production build
+npm run preview       # preview the production build
+npm run check         # astro type checking
+npm run lint:check    # lint with ESLint
+npm run lint:fix      # lint and apply safe fixes
+npm run format:check  # check formatting with Prettier
+npm run format:fix    # format files with Prettier
+npm run test:e2e      # Playwright E2E and screenshot tests
 ```
 
 > [!NOTE]
-> `bun install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
+> `npm install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
 
 ## Seasonal theme
 
@@ -75,19 +75,19 @@ Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
 Set up once per machine:
 
 ```sh
-bunx playwright install chromium
+npx playwright install chromium
 ```
 
 Then build and run. Playwright serves the production build with `astro preview` on port 4322, so it never collides with the dev server on :4321:
 
 ```sh
-bun run build
-bun run test:e2e                                         # everything
-bunx playwright test src/tests/e2e                       # E2E only
-bunx playwright test src/tests/screenshots               # screenshots only
-bunx playwright test src/tests/screenshots/blog.spec.ts  # one page
-bunx playwright test --ui                                # interactive runner
-bunx playwright show-report                              # open the last HTML report
+npm run build
+npm run test:e2e                                        # everything
+npx playwright test src/tests/e2e                       # E2E only
+npx playwright test src/tests/screenshots               # screenshots only
+npx playwright test src/tests/screenshots/blog.spec.ts  # one page
+npx playwright test --ui                                # interactive runner
+npx playwright show-report                              # open the last HTML report
 ```
 
 ### Screenshots
