@@ -4,19 +4,17 @@ import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
 import PostCard from '@/components/PostCard.astro';
-import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
+import { BLOG_DESCRIPTION, SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const lede = "Notes on what I'm building, learning, and figuring out along the way";
 ---
 
 <Layout title=`Blog — ${SITE_NAME}` description={SITE_DESCRIPTION} canonicalPath="/blog/">
   <main class="content-shell">
     <PageHero title="Blog" hideTitle>
-      <Lede>{lede}</Lede>
+      <Lede>{BLOG_DESCRIPTION}</Lede>
     </PageHero>
 
     <section class="section" aria-label="Blog posts">

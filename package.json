@@ -1,13 +1,14 @@
 {
-  "name": "astro-palette",
+  "name": "astro-seasons-neobrutalist",
   "private": true,
   "license": "AGPL-3.0-or-later",
-  "description": "A minimal Astro theme for personal sites and blogs",
+  "description": "A season-aware neobrutalist theme for your blog",
   "keywords": [
     "astro",
     "withastro",
     "astro-theme",
     "astro-template",
+    "neobrutalist",
     "blog"
   ],
   "type": "module",

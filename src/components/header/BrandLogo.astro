@@ -1,5 +1,11 @@
+---
+import { SITE_NAME } from '@/lib/site';
+
+const initial: string = SITE_NAME.charAt(0).toUpperCase();
+---
+
 <span class="brand-logo" aria-hidden="true">
-  N
+  {initial}
 </span>
 
 <style>

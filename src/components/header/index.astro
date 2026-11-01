@@ -1,6 +1,6 @@
 ---
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
-import { LINKEDIN_URL, SITE_NAME } from '@/lib/site';
+import { GITHUB_URL, LINKEDIN_URL, SITE_NAME } from '@/lib/site';
 import BrandLogo from './BrandLogo.astro';
 import GitHubIcon from './GitHubIcon.astro';
 import LinkedInIcon from './LinkedInIcon.astro';
@@ -61,13 +61,7 @@ const navMenuItems = [
         <button class="nav-icon-link" type="button" id="search-open" aria-label="Search (Ctrl+K)">
           <SearchIcon />
         </button>
-        <a
-          class="nav-icon-link"
-          href="https://github.com/nicomiguelino"
-          aria-label="GitHub"
-          target="_blank"
-          rel="noopener"
-        >
+        <a class="nav-icon-link" href={GITHUB_URL} aria-label="GitHub" target="_blank" rel="noopener">
           <GitHubIcon />
         </a>
         <a class="nav-icon-link" href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noopener">

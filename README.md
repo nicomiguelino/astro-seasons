@@ -1,21 +1,10 @@
-# Nico Miguelino
+# Seasons
+
+A season-aware neobrutalist theme for your blog, built with [Astro](https://astro.build/) and Tailwind CSS. The palette follows the calendar, with a light and a dark mode for every season. See the [screenshots](#seasonal-theme) below.
 
 ## Getting started
 
-Clone the repo:
-
-```sh
-git clone git@github.com:nicomiguelino/nicomiguelino.github.io.git
-cd nicomiguelino.github.io
-```
-
-If you use Claude Code, install the project plugin once:
-
-```sh
-claude plugin install nicomiguelino@nicomiguelino --scope project
-```
-
-Then install and run:
+Install the dependencies and run the project:
 
 ```sh
 npm install
@@ -70,7 +59,7 @@ To preview a season, set it in the browser console, e.g. `document.documentEleme
 Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
 
 - `src/tests/e2e/`: behavior checks, e.g. the home page title
-- `src/tests/screenshots/`: captures a screenshot of each page, one spec per page
+- `src/tests/screenshots/`: captures the home page in every season, in light and dark
 
 Set up once per machine:
 
@@ -85,42 +74,44 @@ npm run build
 npm run test:e2e                                        # everything
 npx playwright test src/tests/e2e                       # E2E only
 npx playwright test src/tests/screenshots               # screenshots only
-npx playwright test src/tests/screenshots/blog.spec.ts  # one page
 npx playwright test --ui                                # interactive runner
 npx playwright show-report                              # open the last HTML report
 ```
 
 ### Screenshots
 
-- Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn, winter and spring.
+- The home page is captured at 1920x1200 in light and dark, once for each season.
 - The clock is pinned (July 15 for summer, Oct 15 for autumn, Jan 15 for winter, Apr 15 for spring), so results don't depend on today's date.
-- `falling-particles` captures the home page with the falling effects frozen mid-fall (autumn, winter and spring; summer has no particles), since the other screenshots disable animations and so hide the particles.
 - The color scheme is emulated with `prefers-color-scheme`.
 - Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
-- To add a page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[SUMMER_SEASON, AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]` as a third argument to cover every palette.
+- To capture another page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[SUMMER_SEASON, AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]` as a third argument to cover every palette.
 
 The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared dependency setup, on pushes and pull requests to `main`. It can also be started manually.
 
 ## Customizing
 
-Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
+Site-wide values (site name, author name, description, job title, site URL, the GitHub and LinkedIn profile links, and the blog, tags, and experience page descriptions) live in `src/lib/site.ts`. The header, footer, page titles, RSS feed, search, and structured data all read from it, and the letter in the header logo is the first character of `SITE_NAME`. Everything else to customize:
 
-- `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
+- `src/components/header/index.astro` and `src/components/Footer.astro`: navigation, header icons, footer
+- `src/pages/index.astro`: the home page heading and the intro card
+- `src/components/experience/` and `src/pages/experience/index.astro`: the experience page. Each job is one component built on `ExperienceEntry.astro`. Rename, edit, or add components, then list them in the page
+- `src/lib/search.ts`: the search entries for the static pages (home, blog, tags, experience). Their descriptions come from `site.ts`, but the home and experience bodies are plain text, so update them when you change those pages
+- `public/favicon.svg`: the tab icon, a static file that doesn't follow `SITE_NAME`, so replace it with your own
 - `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, season dates); see [Seasonal theme](#seasonal-theme)
 - `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
-- `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
-- `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
+- `public/robots.txt`: the sitemap URL (a static file, so it can't import from `site.ts`)
+- `public/assets/og.png`: social preview image, 1200x630. It's a screenshot of the autumn home page, so replace it with your own
 
 ## Writing posts
 
-Posts are markdown files in `src/content/blog/` with `title`, `description`, `date`, optional `tags`, and optional `draft` frontmatter. Each tag links to its archive page under `/tags/`. `initial-post.md` shows the frontmatter and the supported markdown.
+Posts are markdown files in `src/content/blog/` with `title`, `description`, `date`, optional `tags`, and optional `draft` frontmatter. Each tag links to its archive page under `/tags/`. `markdown-features.md` shows the frontmatter and every supported markdown feature, and `make-it-yours.md` is a short customization guide. Delete both when you add your own posts.
 
 ## Project structure
 
 ```
 src/
-  components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
+  components/     # reusable UI: layout, header, experience entries, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
   pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss

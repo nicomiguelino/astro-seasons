@@ -1,27 +1,23 @@
 ---
-import { SITE_NAME } from '@/lib/site';
+import { EXPERIENCE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
-import Screenly from '@/components/experience/Screenly.astro';
-import DostAstiBackend from '@/components/experience/DostAstiBackend.astro';
-import Nokia from '@/components/experience/Nokia.astro';
-import DostAstiTestAutomation from '@/components/experience/DostAstiTestAutomation.astro';
-
-const description = 'My tech journey so far...';
+import LeadEngineer from '@/components/experience/LeadEngineer.astro';
+import SoftwareEngineer from '@/components/experience/SoftwareEngineer.astro';
+import JuniorDeveloper from '@/components/experience/JuniorDeveloper.astro';
 ---
 
-<Layout title=`Experience — ${SITE_NAME}` description={description} canonicalPath="/experience/">
+<Layout title=`Experience — ${SITE_NAME}` description={EXPERIENCE_DESCRIPTION} canonicalPath="/experience/">
   <main class="content-shell">
     <PageHero title="Experience" hideTitle>
-      <Lede>{description}</Lede>
+      <Lede>{EXPERIENCE_DESCRIPTION}</Lede>
     </PageHero>
 
     <section class="section grid gap-8" aria-label="Work experience">
-      <Screenly />
-      <DostAstiBackend />
-      <Nokia />
-      <DostAstiTestAutomation />
+      <LeadEngineer />
+      <SoftwareEngineer />
+      <JuniorDeveloper />
     </section>
   </main>
 </Layout>

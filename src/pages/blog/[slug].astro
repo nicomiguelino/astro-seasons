@@ -4,7 +4,7 @@ import Layout from '@/components/Layout.astro';
 import Tag from '@/components/Tag.astro';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
-import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { AUTHOR_NAME, SITE_NAME, SITE_URL } from '@/lib/site';
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
 
 export async function getStaticPaths() {
@@ -35,7 +35,7 @@ const postSchema = JSON.stringify({
   url: new URL(`/blog/${slug}/`, Astro.site).toString(),
   author: {
     '@type': 'Person',
-    name: SITE_NAME,
+    name: AUTHOR_NAME,
     url: new URL('/', SITE_URL).toString(),
   },
 }).replace(/</g, '\\u003c');
