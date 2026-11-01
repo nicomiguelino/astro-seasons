@@ -1,0 +1,72 @@
+---
+import FallingLeaves from '@/components/FallingLeaves.astro';
+import FallingPetals from '@/components/FallingPetals.astro';
+import FallingSnow from '@/components/FallingSnow.astro';
+import HeatShimmer from '@/components/HeatShimmer.astro';
+import Layout from '@/components/Layout.astro';
+import Highlight from '@/components/Highlight.astro';
+import PageHero from '@/components/PageHero.astro';
+import Sunlight from '@/components/Sunlight.astro';
+import { AUTHOR_NAME, GITHUB_URL, JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
+
+const personSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR_NAME,
+  jobTitle: JOB_TITLE,
+  url: SITE_URL,
+  sameAs: [GITHUB_URL, LINKEDIN_URL],
+}).replace(/</g, '\\u003c');
+---
+
+<Layout title={SITE_NAME} description={SITE_DESCRIPTION} canonicalPath="/">
+  <script type="application/ld+json" is:inline set:html={personSchema}></script>
+  <FallingLeaves />
+  <FallingSnow />
+  <FallingPetals />
+  <Sunlight />
+  <HeatShimmer>
+    <main class="content-shell">
+      <PageHero title="Home" hideTitle>
+        <h2 class:list={['text-[clamp(3rem,4.5vw,4.25rem)]', 'leading-[1.1]', 'tracking-[-0.03em]']}>
+          A <Highlight>season-aware</Highlight>, <Highlight>neobrutalist</Highlight> theme for
+          <Highlight>your blog</Highlight>
+        </h2>
+      </PageHero>
+
+      <section class="section" aria-label="About">
+        <div class="flex justify-center w-full mt-10">
+          <div class="card">
+            <div class="about-prose">
+              <p>
+                <Highlight bold>Seasons</Highlight> is a <Highlight bold>neobrutalist</Highlight> Astro theme for
+                personal sites and blogs. Its colors follow the calendar, moving through{' '}
+                <Highlight bold>autumn</Highlight>, <Highlight bold>winter</Highlight>,{' '}
+                <Highlight bold>spring</Highlight>, and <Highlight bold>summer</Highlight>, each with a light and a dark
+                mode.
+              </p>
+
+              <p>
+                Replace this card with a short introduction about yourself, and{' '}
+                <Highlight bold>make it yours</Highlight>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </HeatShimmer>
+</Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .card {
+    @apply rounded-none border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)];
+  }
+
+  .about-prose p {
+    @apply mb-[1.2rem] font-heading text-[1.3rem] leading-[1.75] last:mb-0;
+    color: color-mix(in srgb, var(--ink) 82%, var(--muted));
+  }
+</style>

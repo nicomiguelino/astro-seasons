@@ -1,0 +1,11 @@
+---
+import { SITE_NAME } from '@/lib/site';
+
+const fullYear = new Date().getFullYear();
+---
+
+<footer class="flex items-center justify-center gap-4 border-t-4 border-ink px-5 py-7 font-heading text-[0.95rem] font-semibold text-ink">
+  <span>
+    &copy; {fullYear} {SITE_NAME}
+  </span>
+</footer>
