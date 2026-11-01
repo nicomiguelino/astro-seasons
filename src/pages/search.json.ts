@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import { withBase } from '@/lib/paths';
 import { postSlug } from '@/lib/posts';
 import { PAGE_SEARCH_ENTRIES, type SearchEntry } from '@/lib/search';
 
@@ -14,7 +15,10 @@ export async function GET(): Promise<Response> {
       url: `/blog/${postSlug(post)}/`,
     }));
 
-  const entries: SearchEntry[] = [...PAGE_SEARCH_ENTRIES, ...postEntries];
+  const entries: SearchEntry[] = [...PAGE_SEARCH_ENTRIES, ...postEntries].map((entry) => ({
+    ...entry,
+    url: withBase(entry.url),
+  }));
 
   return new Response(JSON.stringify(entries), {
     headers: { 'Content-Type': 'application/json' },

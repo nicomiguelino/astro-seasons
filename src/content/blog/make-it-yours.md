@@ -47,7 +47,7 @@ Edit the values to change a season, or add a new block to create another palette
 
 ## Write your own posts
 
-Posts are Markdown files in `src/content/blog/`. Delete these two guides when you are ready, and add your own. The [Markdown features](/blog/markdown-features/) post shows everything you can use.
+Posts are Markdown files in `src/content/blog/`. Delete these two guides when you are ready, and add your own. The [Markdown features](../markdown-features/) post shows everything you can use.
 
 > Keep the first post short. Publishing something small is better than polishing a draft forever.
 

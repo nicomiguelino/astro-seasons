@@ -7,14 +7,15 @@ import Layout from '@/components/Layout.astro';
 import Highlight from '@/components/Highlight.astro';
 import PageHero from '@/components/PageHero.astro';
 import Sunlight from '@/components/Sunlight.astro';
-import { AUTHOR_NAME, GITHUB_URL, JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
+import { withBase } from '@/lib/paths';
+import { AUTHOR_NAME, GITHUB_URL, JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 
 const personSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: AUTHOR_NAME,
   jobTitle: JOB_TITLE,
-  url: SITE_URL,
+  url: new URL(withBase('/'), Astro.site).toString(),
   sameAs: [GITHUB_URL, LINKEDIN_URL],
 }).replace(/</g, '\\u003c');
 ---
