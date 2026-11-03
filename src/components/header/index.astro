@@ -20,7 +20,7 @@ const navMenuItems = [
   {
     href: withBase('/blog/'),
     title: 'Blog',
-    current: currentPath.startsWith('/blog'),
+    current: currentPath.startsWith('/blog') || currentPath.startsWith('/tags'),
   },
   {
     href: withBase('/experience/'),
@@ -36,11 +36,6 @@ const navMenuItems = [
     href: withBase('/colors/'),
     title: 'Colors',
     current: currentPath.startsWith('/colors'),
-  },
-  {
-    href: withBase('/tags/'),
-    title: 'Tags',
-    current: currentPath.startsWith('/tags'),
   },
 ];
 ---

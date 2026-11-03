@@ -84,7 +84,7 @@ To preview a season, set it in the browser console, e.g. `document.documentEleme
 Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
 
 - `src/tests/e2e/`: behavior checks, e.g. the home page title
-- `src/tests/screenshots/`: captures the home and projects pages in every season, in light and dark
+- `src/tests/screenshots/`: captures the home page in every season and the projects page in summer, in light and dark
 
 Set up once per machine:
 
@@ -105,10 +105,10 @@ npx playwright show-report                              # open the last HTML rep
 
 ### Screenshots
 
-- The home and projects pages are captured at 1920x1200 in light and dark, once for each season.
+- The home page is captured at 1920x1200 in light and dark, once for each season. The projects page is captured in summer only.
 - The clock is pinned (July 15 for summer, Oct 15 for autumn, Jan 15 for winter, Apr 15 for spring), so results don't depend on today's date.
 - The color scheme is emulated with `prefers-color-scheme`.
-- Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png` and `projects-autumn-dark.png`.
+- Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png` and `projects-summer-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
 - To capture another page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[SUMMER_SEASON, AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]` as a third argument to cover every palette.
 
