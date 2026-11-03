@@ -4,6 +4,7 @@ import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
 import PostCard from '@/components/PostCard.astro';
+import { withBase } from '@/lib/paths';
 import { BLOG_DESCRIPTION, SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 
 const posts = (await getCollection('blog'))
@@ -15,6 +16,9 @@ const posts = (await getCollection('blog'))
   <main class="content-shell">
     <PageHero title="Blog" hideTitle>
       <Lede>{BLOG_DESCRIPTION}</Lede>
+      <a class="tags-link" href={withBase('/tags/')}>
+        Browse by tag <span aria-hidden="true">→</span>
+      </a>
     </PageHero>
 
     <section class="section" aria-label="Blog posts">
@@ -30,3 +34,17 @@ const posts = (await getCollection('blog'))
     </section>
   </main>
 </Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .tags-link {
+    @apply inline-flex min-h-[2.6rem] items-center gap-2 border-2 border-ink bg-bg-elevated px-[1.1rem] py-[0.6rem];
+    @apply font-heading text-[0.9rem] font-semibold text-ink shadow-[3px_3px_0_0_var(--ink)];
+    @apply transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
+  }
+
+  .tags-link:hover {
+    @apply translate-x-[1px] translate-y-[1px] bg-accent text-bg shadow-[2px_2px_0_0_var(--ink)];
+  }
+</style>
