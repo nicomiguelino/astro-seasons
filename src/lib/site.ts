@@ -10,3 +10,4 @@ export const SOURCE_URL = 'https://github.com/nicomiguelino/astro-seasons';
 export const BLOG_DESCRIPTION = 'Guides and notes for getting the most out of this theme';
 export const TAGS_DESCRIPTION = 'Posts grouped by tag';
 export const EXPERIENCE_DESCRIPTION = 'A short summary of where I have worked and what I have done.';
+export const PROJECTS_DESCRIPTION = 'A few things I have built, with links to the source.';

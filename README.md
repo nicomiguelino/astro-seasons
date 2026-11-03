@@ -23,7 +23,7 @@ After generating:
 1. Replace the placeholders in `src/lib/site.ts` (`SITE_NAME`, `AUTHOR_NAME`, `SITE_URL`, `GITHUB_URL`, and so on). `astro.config.mjs` reads `SITE_URL` from there.
 2. Set `SOURCE_URL` in `src/lib/site.ts` to the repository that builds your site (see [License](#license)).
 3. If you deploy to a sub-path (a GitHub Pages project page at `https://<user>.github.io/<repo>/`), see [Deploying under a sub-path](#deploying-under-a-sub-path).
-4. Replace the example posts in `src/content/blog/` and the pages under `src/pages/` (such as `experience/`) with your own content.
+4. Replace the example posts in `src/content/blog/` and the pages under `src/pages/` (such as `experience/` and `projects/`) with your own content.
 
 Prefer to work from a clone? Run `git clone https://github.com/nicomiguelino/astro-seasons.git` and follow the steps below.
 
@@ -84,7 +84,7 @@ To preview a season, set it in the browser console, e.g. `document.documentEleme
 Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
 
 - `src/tests/e2e/`: behavior checks, e.g. the home page title
-- `src/tests/screenshots/`: captures the home page in every season, in light and dark
+- `src/tests/screenshots/`: captures the home page in every season and the projects page in summer, in light and dark
 
 Set up once per machine:
 
@@ -105,10 +105,10 @@ npx playwright show-report                              # open the last HTML rep
 
 ### Screenshots
 
-- The home page is captured at 1920x1200 in light and dark, once for each season.
+- The home page is captured at 1920x1200 in light and dark, once for each season. The projects page is captured in summer only.
 - The clock is pinned (July 15 for summer, Oct 15 for autumn, Jan 15 for winter, Apr 15 for spring), so results don't depend on today's date.
 - The color scheme is emulated with `prefers-color-scheme`.
-- Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
+- Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png` and `projects-summer-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
 - To capture another page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[SUMMER_SEASON, AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]` as a third argument to cover every palette.
 
@@ -138,12 +138,13 @@ This applies to `href`, `src`, and `fetch` URLs in `.astro` and `.ts` files. In 
 
 ## Customizing
 
-Site-wide values (site name, author name, description, job title, site URL, the GitHub and LinkedIn profile links, and the blog, tags, and experience page descriptions) live in `src/lib/site.ts`. The header, footer, page titles, RSS feed, search, and structured data all read from it, and the letter in the header logo is the first character of `SITE_NAME`. Everything else to customize:
+Site-wide values (site name, author name, description, job title, site URL, the GitHub and LinkedIn profile links, and the blog, tags, experience, and projects page descriptions) live in `src/lib/site.ts`. The header, footer, page titles, RSS feed, search, and structured data all read from it, and the letter in the header logo is the first character of `SITE_NAME`. Everything else to customize:
 
 - `src/components/header/index.astro` and `src/components/Footer.astro`: navigation, header icons, footer
 - `src/pages/index.astro`: the home page heading and the intro card
 - `src/components/experience/` and `src/pages/experience/index.astro`: the experience page. Each job is one component built on `ExperienceEntry.astro`. Rename, edit, or add components, then list them in the page
-- `src/lib/search.ts`: the search entries for the static pages (home, blog, tags, experience). Their descriptions come from `site.ts`, but the home and experience bodies are plain text, so update them when you change those pages
+- `src/components/ProjectCard.astro` and `src/pages/projects/index.astro`: the projects page. Edit the `projects` array in the page (name, description, technologies, and link), and update the matching body in `src/lib/search.ts`
+- `src/lib/search.ts`: the search entries for the static pages (home, blog, tags, experience, projects). Their descriptions come from `site.ts`, but the home, experience, and projects bodies are plain text, so update them when you change those pages
 - `public/favicon.svg`: the tab icon, a static file that doesn't follow `SITE_NAME`, so replace it with your own
 - `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, season dates); see [Seasonal theme](#seasonal-theme)
 - `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
@@ -158,10 +159,10 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 ```
 src/
-  components/     # reusable UI: layout, header, experience entries, page hero, post card, search, theme toggle
+  components/     # reusable UI: layout, header, experience entries, project card, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
-  pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss
+  pages/          # index (home), blog/, experience/, projects/, colors/, tags/, 404, rss
   styles/         # global styles, design tokens, palette definitions (Tailwind CSS)
   tests/          # Playwright specs: e2e/ and screenshots/
 screenshots/      # committed screenshot baselines (not deployed)
