@@ -3,9 +3,7 @@ import { EXPERIENCE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
-import LeadEngineer from '@/components/experience/LeadEngineer.astro';
-import SoftwareEngineer from '@/components/experience/SoftwareEngineer.astro';
-import JuniorDeveloper from '@/components/experience/JuniorDeveloper.astro';
+import Experience from '@/components/experience/index.astro';
 ---
 
 <Layout title=`Experience — ${SITE_NAME}` description={EXPERIENCE_DESCRIPTION} canonicalPath="/experience/">
@@ -15,9 +13,7 @@ import JuniorDeveloper from '@/components/experience/JuniorDeveloper.astro';
     </PageHero>
 
     <section class="section grid gap-8" aria-label="Work experience">
-      <LeadEngineer />
-      <SoftwareEngineer />
-      <JuniorDeveloper />
+      <Experience />
     </section>
   </main>
 </Layout>
