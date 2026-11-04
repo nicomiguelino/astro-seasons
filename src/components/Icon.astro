@@ -1,0 +1,23 @@
+---
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+
+interface Props {
+  icon: IconDefinition;
+  class?: string;
+  [attribute: string]: unknown;
+}
+
+// Font Awesome Free icons (https://fontawesome.com), licensed CC BY 4.0.
+const { icon, class: className, ...attributes } = Astro.props;
+const [width, height, , , path] = icon.icon;
+---
+
+<svg
+  class:list={['size-4 fill-current', className]}
+  viewBox={`0 0 ${width} ${height}`}
+  aria-hidden="true"
+  focusable="false"
+  {...attributes}
+>
+  <path d={path as string}></path>
+</svg>
