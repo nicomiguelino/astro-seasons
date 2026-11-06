@@ -103,11 +103,27 @@ No syntax highlighting here.
 
 ## Images
 
-Images use the standard Markdown syntax. Put the file in `src/assets/` and reference it with a relative path. Astro optimizes it at build time and handles the site's base path for you. The alt text inside the brackets describes the image for screen readers:
+Images use the standard Markdown syntax. Put the file in `src/assets/` and reference it with the `@/` alias, which points to `src/`:
+
+```md
+![A calico cat with tabby stripes walking through sunlit grass](@/assets/blog/markdown-features/calico-cat.jpg)
+```
+
+The text inside the brackets is the alt text. It describes the image for screen readers, so keep it short and specific. Here is the result:
 
 ![A calico cat with tabby stripes walking through sunlit grass](@/assets/blog/markdown-features/calico-cat.jpg)
 
 Photo by [Jim](https://unsplash.com/@iqsphotography) on [Unsplash](https://unsplash.com/photos/a-cat-walking-through-the-grass-in-the-sun-TM94BtDnId8).
+
+Astro optimizes images from `src/assets/` at build time and adds the site's base path for you. A relative path works too:
+
+```md
+![A calico cat walking through grass](../../assets/blog/markdown-features/calico-cat.jpg)
+```
+
+Images in `public/` are served as-is, so Astro never optimizes them. Root-absolute paths like `/assets/photo.jpg` also don't get the site's base path, so they break when the site is deployed under a subpath. Prefer `src/assets/` for post images.
+
+The `<Image />` component is not available in `.md` files. If you need it, rename the post to `.mdx`.
 
 ## Putting it together
 
