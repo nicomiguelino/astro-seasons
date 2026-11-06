@@ -101,6 +101,14 @@ A block without a language is shown as plain text:
 No syntax highlighting here.
 ```
 
+## Images
+
+Images use the standard Markdown syntax. Put the file in `src/assets/` and reference it with a relative path. Astro optimizes it at build time and handles the site's base path for you. The alt text inside the brackets describes the image for screen readers:
+
+![A calico cat with tabby stripes walking through sunlit grass](@/assets/blog/markdown-features/calico-cat.jpg)
+
+Photo by [Jim](https://unsplash.com/@iqsphotography) on [Unsplash](https://unsplash.com/photos/a-cat-walking-through-the-grass-in-the-sun-TM94BtDnId8).
+
 ## Putting it together
 
 A post usually mixes these features. Start with a short introduction, split the rest into `##` sections, and use lists, quotes, and code blocks where they help the reader.
