@@ -1,33 +1,24 @@
 ---
-import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons';
-import {
-  faBolt,
-  faCalendar,
-  faSeedling,
-  faSnowflake,
-  faUmbrellaBeach,
-  type IconDefinition,
-} from '@fortawesome/free-solid-svg-icons';
 import Icon from '@/components/Icon.astro';
+import { getIcon, type IconSource } from '@/lib/icons';
 import type { ThemeChoice } from '@/lib/palette';
 
 interface ThemeOption {
   choice: ThemeChoice;
   label: string;
-  icon: IconDefinition;
-  iconClass?: string;
+  icon: IconSource;
   dividerLabel?: string;
 }
 
 const DEFAULT_CHOICE: ThemeChoice = 'auto';
 
 const themeOptions: ThemeOption[] = [
-  { choice: 'auto', label: 'Automatic', icon: faCalendar },
-  { choice: 'autumn', label: 'Autumn', icon: faCanadianMapleLeaf, iconClass: 'rotate-30', dividerLabel: 'Seasons' },
-  { choice: 'winter', label: 'Winter', icon: faSnowflake },
-  { choice: 'spring', label: 'Spring', icon: faSeedling },
-  { choice: 'summer', label: 'Summer', icon: faUmbrellaBeach },
-  { choice: 'neon', label: 'Neon', icon: faBolt, dividerLabel: 'Other' },
+  { choice: 'auto', label: 'Automatic', icon: getIcon('calendar') },
+  { choice: 'autumn', label: 'Autumn', icon: getIcon('leaf'), dividerLabel: 'Seasons' },
+  { choice: 'winter', label: 'Winter', icon: getIcon('snowflake') },
+  { choice: 'spring', label: 'Spring', icon: getIcon('seeding') },
+  { choice: 'summer', label: 'Summer', icon: getIcon('beach') },
+  { choice: 'neon', label: 'Neon', icon: getIcon('bolt'), dividerLabel: 'Other' },
 ];
 ---
 
@@ -36,7 +27,7 @@ const themeOptions: ThemeOption[] = [
     {themeOptions.map((option: ThemeOption) => (
       <Icon
         icon={option.icon}
-        class:list={['picker-icon', option.iconClass, { hidden: option.choice !== DEFAULT_CHOICE }]}
+        class:list={['picker-icon', { hidden: option.choice !== DEFAULT_CHOICE }]}
         data-icon={option.choice}
       />
     ))}
@@ -50,7 +41,7 @@ const themeOptions: ThemeOption[] = [
           </div>
         )}
         <button class="theme-picker-option" type="button" data-theme-option={option.choice} aria-pressed="false">
-          <Icon icon={option.icon} class={option.iconClass} />
+          <Icon icon={option.icon} />
           <span>{option.label}</span>
         </button>
       </>
@@ -116,7 +107,7 @@ const themeOptions: ThemeOption[] = [
   }
 
   .theme-picker-button {
-    @apply inline-flex size-[2.1rem] cursor-pointer list-none items-center justify-center rounded-none border-2 border-ink bg-bg-elevated text-ink;
+    @apply flex size-[2.1rem] cursor-pointer list-none items-center justify-center rounded-none border-2 border-ink bg-bg-elevated text-ink;
     @apply shadow-[3px_3px_0_0_var(--ink)] transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
   }
 
