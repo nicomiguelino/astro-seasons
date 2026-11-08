@@ -23,7 +23,7 @@ const { name, description, technologies, url } = Astro.props;
       ))}
     </ul>
   )}
-  <p class:list={['mt-auto pt-5 font-heading font-bold text-accent', ...ANIMATED_UNDERLINE_CLASSES]}>
+  <p class:list={['mt-auto pt-5 font-heading font-medium text-accent', ...ANIMATED_UNDERLINE_CLASSES]}>
     <a href={url} target="_blank" rel="noopener" aria-label={`View ${name} on GitHub`}>
       View on GitHub
     </a>
