@@ -8,9 +8,11 @@ tags:
 draft: false
 ---
 
+import { Image } from 'astro:assets';
 import Highlight from '@/components/Highlight.astro';
 import ColorSwatch from '@/components/posts/ColorSwatch.astro';
 import DemoCard from '@/components/posts/DemoCard.astro';
+import blackCat from '@/assets/blog/mdx-features/black-cat.jpg';
 
 ## Why MDX
 
@@ -82,6 +84,25 @@ Components work inside a sentence, too. The `Highlight` component gives <Highlig
 ```mdx
 A <Highlight>highlighter</Highlight> makes the words stand out.
 ```
+
+## Images
+
+Markdown's `![]()` syntax still works in MDX. When you want more control, use Astro's `<Image />` component. Import it from `astro:assets`, import the image file, and pass the file as `src`:
+
+```mdx
+import { Image } from 'astro:assets';
+import blackCat from '@/assets/blog/mdx-features/black-cat.jpg';
+
+<Image src={blackCat} alt="A black cat with yellow eyes sitting on a wooden bench" width={800} class="my-8" />
+```
+
+Here is the result:
+
+<Image src={blackCat} alt="A black cat with yellow eyes sitting on a wooden bench" width={800} class="my-8" />
+
+Photo by [Kristin O Karlsen](https://unsplash.com/@kristinokarlsen) on [Unsplash](https://unsplash.com/photos/a-black-cat-sitting-on-top-of-a-wooden-bench-m3CtRNfbJlI).
+
+Like Markdown images, `<Image />` optimizes the file at build time and adds the site's base path. It also sets the image's dimensions so the page doesn't jump while it loads. Props such as `width`, `format`, and `quality` let you control the output, and `class` styles the `<img>`. As with Markdown images, keep the file in `src/assets/` so Astro can process it.
 
 ## Define your own components
 
