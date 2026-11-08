@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 import { SITE_URL } from './src/lib/site.ts';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -17,7 +18,7 @@ export default defineConfig({
     shikiConfig: { theme: 'css-variables' },
   },
 
-  integrations: [sitemap()],
+  integrations: [sitemap(), mdx()],
 
   vite: {
     plugins: [tailwindcss()],
