@@ -85,6 +85,7 @@ Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
 
 - `src/tests/e2e/`: behavior checks, e.g. the home page title
 - `src/tests/screenshots/`: captures the home page in every season and the projects page in summer, in light and dark
+- `src/tests/fixtures/blog/`: fixture posts the Playwright build uses in place of the real ones
 
 Set up once per machine:
 
@@ -92,10 +93,9 @@ Set up once per machine:
 npx playwright install chromium
 ```
 
-Then build and run. Playwright serves the production build with `astro preview` on port 4322, so it never collides with the dev server on :4321:
+Then run the tests. Playwright builds the site and serves it with `astro preview` on port 4322, so it never collides with the dev server on :4321:
 
 ```sh
-npm run build
 npm run test:e2e                                        # everything
 npx playwright test src/tests/e2e                       # E2E only
 npx playwright test src/tests/screenshots               # screenshots only
@@ -108,6 +108,8 @@ npx playwright show-report                              # open the last HTML rep
 - The home page is captured at 1920x1200 in light and dark, once for each season. The projects page is captured in summer only.
 - The clock is pinned (July 15 for summer, Oct 15 for autumn, Jan 15 for winter, Apr 15 for spring), so results don't depend on today's date.
 - The color scheme is emulated with `prefers-color-scheme`.
+- Content is pinned too. The Playwright build sets `USE_FIXTURE_POSTS`, which makes the content collection in `src/content.config.ts` load the posts in `src/tests/fixtures/blog/` instead of `src/content/blog/`. Adding or editing a real post leaves `screenshots/` unchanged.
+- Fixture posts have fixed titles, tags, and dates. Edit them only when a screenshot should change, and keep a word like "tool" in one of them, since the search E2E spec queries it.
 - Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png` and `projects-summer-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
 - To capture another page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[SUMMER_SEASON, AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]` as a third argument to cover every palette.
