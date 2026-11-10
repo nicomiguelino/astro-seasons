@@ -188,4 +188,5 @@ With thanks to:
 - Style: [Neubrutalism](https://neubrutalism.com/), the design style behind the hard borders, offset shadows, and bold colors
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 - Icons: [Tabler Icons](https://tabler.io/icons) (MIT)
+- Home page photo: [Mark Olsen](https://unsplash.com/photos/a-close-up-of-a-cat-looking-at-the-camera-rj4KLIcDwwc) on Unsplash
 - Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)

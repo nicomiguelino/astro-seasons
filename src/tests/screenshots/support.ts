@@ -48,6 +48,21 @@ async function freezeSvgAnimations(page: Page): Promise<void> {
   });
 }
 
+// Images are decoded asynchronously, so a capture taken right after `goto` can show an empty frame where a
+// photo should be. Wait for the eager ones (lazy ones below the fold may never load, so skip those).
+async function waitForImages(page: Page): Promise<void> {
+  await page.evaluate(async (): Promise<void> => {
+    const images: HTMLImageElement[] = Array.from(document.images).filter(
+      (image: HTMLImageElement): boolean => image.loading !== 'lazy',
+    );
+    await Promise.all(images.map((image: HTMLImageElement) => image.decode().catch(() => undefined)));
+  });
+}
+
+// The summer heat shimmer is an SVG filter over the whole page. It paints a decoded image slightly later
+// than the plain frame, and no frame or load event signals when, so give it a moment to settle.
+const FILTER_SETTLE_MS: number = 300;
+
 export function defineScreenshotTests(
   pageName: string,
   path: string,
@@ -61,7 +76,9 @@ export function defineScreenshotTests(
         await page.clock.setFixedTime(new Date(season.date));
         await page.emulateMedia({ colorScheme });
         await page.goto(path);
+        await waitForImages(page);
         await freezeSvgAnimations(page);
+        await page.waitForTimeout(FILTER_SETTLE_MS);
         if (options.keepAnimations) {
           await freezeParticleAnimations(page);
           await page.screenshot({ path: outputPath, animations: 'allow' });

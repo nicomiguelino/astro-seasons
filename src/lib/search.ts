@@ -19,7 +19,7 @@ export const PAGE_SEARCH_ENTRIES: SearchEntry[] = [
     title: 'Home',
     description: SITE_DESCRIPTION,
     tags: [],
-    body: 'Seasons is a neobrutalist Astro theme for personal sites and blogs. Its colors follow the calendar, moving through autumn, winter, spring, and summer, each with a light and a dark mode. Replace this card with a short introduction about yourself, and make it yours.',
+    body: 'Seasons is a neobrutalist Astro theme for personal sites and blogs. Its colors follow the calendar, moving through autumn, winter, spring, and summer, each with a light and a dark mode. Replace this card with a short introduction about yourself, and make it yours. What you get. Four seasons: autumn, winter, spring, and summer palettes that follow the calendar. Light and dark: every season has both modes, and the toggle remembers your choice. Blog ready: Markdown and MDX posts with tags, an RSS feed, and instant search.',
     url: '/',
   },
   {
