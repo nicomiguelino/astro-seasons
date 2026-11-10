@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/Card.astro';
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
 
 interface Props {
@@ -15,7 +16,7 @@ const { role, dates, organization } = Astro.props;
 const linkClasses: string[] = ['[&_a]:text-accent', ...ANIMATED_UNDERLINE_CLASSES];
 ---
 
-<article class="border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)]">
+<Card as="article">
   <h2 class:list={['m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em]', ...linkClasses]}>
     {role},{' '}
     {organization.url ? (
@@ -33,4 +34,4 @@ const linkClasses: string[] = ['[&_a]:text-accent', ...ANIMATED_UNDERLINE_CLASSE
   <div class:list={['mt-4 space-y-4 text-ink-soft', ...linkClasses]}>
     <slot />
   </div>
-</article>
+</Card>
