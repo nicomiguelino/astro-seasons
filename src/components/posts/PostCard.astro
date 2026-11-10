@@ -3,8 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import { withBase } from '@/lib/paths';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
-import Card from '@/components/Card.astro';
-import Tag from '@/components/Tag.astro';
+import Card from '@/components/common/Card.astro';
+import Tag from '@/components/common/Tag.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;

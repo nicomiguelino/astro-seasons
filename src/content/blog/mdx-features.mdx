@@ -9,7 +9,7 @@ draft: false
 ---
 
 import { Image } from 'astro:assets';
-import Highlight from '@/components/Highlight.astro';
+import Highlight from '@/components/common/Highlight.astro';
 import ColorSwatch from '@/components/posts/ColorSwatch.astro';
 import DemoCard from '@/components/posts/DemoCard.astro';
 import blackCat from '@/assets/blog/mdx-features/black-cat.jpg';
@@ -27,7 +27,7 @@ Posts with a `.mdx` extension work like Markdown, with one addition: you can imp
 Put the imports right after the frontmatter, then use the components anywhere below:
 
 ```ts
-import Highlight from '@/components/Highlight.astro';
+import Highlight from '@/components/common/Highlight.astro';
 import DemoCard from '@/components/posts/DemoCard.astro';
 ```
 
