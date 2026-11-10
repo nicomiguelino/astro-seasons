@@ -143,7 +143,7 @@ This applies to `href`, `src`, and `fetch` URLs in `.astro` and `.ts` files. In 
 
 Site-wide values (site name, author name, description, job title, site URL, the GitHub and LinkedIn profile links, and the blog, tags, experience, and projects page descriptions) live in `src/lib/site.ts`. The header, footer, page titles, RSS feed, search, and structured data all read from it, and the letter in the header logo is the first character of `SITE_NAME`. Everything else to customize:
 
-- `src/components/header/index.astro` and `src/components/Footer.astro`: navigation, header icons, footer
+- `src/components/header/index.astro` and `src/components/layout/Footer.astro`: navigation, header icons, footer
 - `src/pages/index.astro`: the home page heading and the intro card
 - `src/components/experience/` and `src/pages/experience/index.astro`: the experience page. Each job is one component built on `ExperienceEntry.astro`. Rename, edit, or add components, then list them in `src/components/experience/index.astro`
 - `src/components/projects/` and `src/lib/projects.ts`: the projects page. Edit the `projects` array in `index.astro` (name, description, technologies, and a `links` array of `{ kind, url }`, with an optional `isCooking` flag), add link kinds in `src/lib/projects.ts`, and update the matching body in `src/lib/search.ts`
