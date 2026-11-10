@@ -75,15 +75,22 @@ import DemoCard from '@/components/posts/DemoCard.astro';
 
 ## Inline components
 
-Components work inside a sentence, too. The `Highlight` component gives <Highlight>the words that matter</Highlight> a highlighter-style underline:
+Components work inside a sentence, too. The `Highlight` component gives <Highlight handDrawn>the words that matter</Highlight> a highlighter-style underline. It comes in two styles: the default slanted bar, and `handDrawn`, an uneven marker stroke. Add `bold` for heavier text:
 
-<DemoCard variant="raised" class="p-5 font-heading text-xl font-bold [&_p]:m-0!">
-  A <Highlight>highlighter</Highlight> makes the <Highlight>words that matter</Highlight> stand out.
+{/* prettier-ignore */}
+<DemoCard variant="raised" class="space-y-2 p-5 font-heading text-xl font-bold [&_p]:m-0!">
+  <p>A <Highlight>highlighter</Highlight> makes the <Highlight>words that matter</Highlight> stand out.</p>
+  <p>A <Highlight handDrawn>marker</Highlight> stroke looks human.</p>
+  <p>A <Highlight handDrawn bold>bold</Highlight> one.</p>
 </DemoCard>
 
 ```mdx
 A <Highlight>highlighter</Highlight> makes the words stand out.
+A <Highlight handDrawn>marker</Highlight> stroke looks human.
+A <Highlight handDrawn bold>bold</Highlight> one.
 ```
+
+The hand-drawn style needs a line of its own for each highlight, so below 832px wide it falls back to the default bar.
 
 ## Images
 
