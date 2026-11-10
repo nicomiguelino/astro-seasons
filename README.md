@@ -162,7 +162,7 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 ```
 src/
-  components/     # reusable UI: layout, header, experience entries, project card, page hero, post card, search, theme toggle
+  components/     # reusable UI, grouped by feature (props are documented in each component's frontmatter)
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
   pages/          # index (home), blog/, experience/, projects/, colors/, tags/, 404, rss
