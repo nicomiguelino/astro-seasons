@@ -19,7 +19,20 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
   <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
     <h2 class="m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em] text-ink">{name}</h2>
     {isCooking && (
-      <span class="border-2 border-ink bg-accent px-[0.6rem] py-[0.14rem] font-mono text-[0.7rem] leading-[1.4] font-bold text-bg">
+      <span
+        class:list={[
+          'border-2',
+          'border-ink',
+          'bg-accent',
+          'px-[0.6rem]',
+          'py-[0.14rem]',
+          'font-mono',
+          'text-[0.7rem]',
+          'leading-[1.4]',
+          'font-bold',
+          'text-bg',
+        ]}
+      >
         Cooking
       </span>
     )}
@@ -28,7 +41,20 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
   {technologies.length > 0 && (
     <ul class="m-0 mt-4 flex list-none flex-wrap gap-2 p-0" aria-label={`${name} technologies`}>
       {technologies.map((technology) => (
-        <li class="border-2 border-ink bg-bg px-[0.6rem] py-[0.14rem] font-mono text-[0.7rem] leading-[1.4] font-bold text-ink">
+        <li
+          class:list={[
+            'border-2',
+            'border-ink',
+            'bg-bg',
+            'px-[0.6rem]',
+            'py-[0.14rem]',
+            'font-mono',
+            'text-[0.7rem]',
+            'leading-[1.4]',
+            'font-bold',
+            'text-ink',
+          ]}
+        >
           {technology}
         </li>
       ))}
